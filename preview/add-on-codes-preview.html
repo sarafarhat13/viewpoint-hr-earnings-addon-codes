@@ -104,49 +104,61 @@
         line-height: 0;
       }
 
+      /* CSS grid instead of <table> — custom elements break inside tables */
       .addon-codes-section__grid-wrap {
         overflow-x: auto;
         border: 1px solid var(--modus-wc-color-base-300, #e5e5e5);
         border-radius: 0.5rem;
         background: var(--modus-wc-color-base-0, #fff);
-      }
-
-      .addon-codes-section__grid {
-        width: 100%;
         min-width: 48rem;
-        border-collapse: collapse;
       }
 
-      .addon-codes-section__grid thead th {
+      .codes-grid-header,
+      .codes-grid-row {
+        display: grid;
+        grid-template-columns: minmax(9rem, 1.4fr) minmax(10rem, 1.6fr) 6.5rem 6.5rem 6.5rem 3rem;
+        gap: 0.75rem;
+        align-items: center;
         padding: 0.75rem 1rem;
+      }
+
+      .codes-grid-header {
         font-size: 0.75rem;
         font-weight: 600;
-        text-align: left;
         color: var(--modus-wc-color-base-content-secondary, #404040);
         background: var(--modus-wc-color-base-200, #fafafa);
         border-bottom: 1px solid var(--modus-wc-color-base-300, #e5e5e5);
         white-space: nowrap;
       }
 
-      .addon-codes-section__grid thead th.col-toggle,
-      .addon-codes-section__grid tbody td.col-toggle,
-      .addon-codes-section__grid tbody td.col-actions {
+      .codes-grid-header .col-center,
+      .codes-grid-row .col-center {
         text-align: center;
+        justify-self: center;
       }
 
-      .addon-codes-section__grid tbody td {
-        padding: 0.75rem 1rem;
-        vertical-align: middle;
+      .codes-grid-row {
         border-bottom: 1px solid var(--modus-wc-color-base-200, #f5f5f5);
       }
 
-      .addon-codes-section__grid tbody tr:last-child td {
+      .codes-grid-row:last-child {
         border-bottom: none;
+      }
+
+      .codes-grid-body:empty::after {
+        content: '';
+        display: block;
+        min-height: 0;
       }
 
       .toggle-cell {
         display: flex;
         justify-content: center;
+        width: 100%;
+      }
+
+      .codes-grid-row modus-wc-text-input {
+        width: 100%;
       }
 
       .spectrum-uppercase {
@@ -295,22 +307,18 @@
                     employee paystubs.
                   </p>
 
-                  <div class="addon-codes-section__grid-wrap">
-                    <table class="addon-codes-section__grid">
-                      <thead>
-                        <tr>
-                          <th scope="col">Spectrum Code</th>
-                          <th scope="col">Label</th>
-                          <th scope="col" class="col-toggle">Display YTD</th>
-                          <th scope="col" class="col-toggle">Display Accrued</th>
-                          <th scope="col" class="col-toggle">Display On Check</th>
-                          <th scope="col" class="col-actions">
-                            <span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Actions</span>
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody id="codes-tbody"></tbody>
-                    </table>
+                  <div class="addon-codes-section__grid-wrap" role="table" aria-label="Add-On codes">
+                    <div class="codes-grid-header" role="row">
+                      <div role="columnheader">Spectrum Code</div>
+                      <div role="columnheader">Label</div>
+                      <div role="columnheader" class="col-center">Display YTD</div>
+                      <div role="columnheader" class="col-center">Display Accrued</div>
+                      <div role="columnheader" class="col-center">Display On Check</div>
+                      <div role="columnheader" class="col-center">
+                        <span class="visually-hidden">Actions</span>
+                      </div>
+                    </div>
+                    <div id="codes-grid-body" class="codes-grid-body" role="rowgroup"></div>
                   </div>
 
                   <div class="addon-codes-section__actions">
@@ -449,24 +457,25 @@
       }
 
       function render() {
-        const tbody = document.getElementById('codes-tbody');
+        const gridBody = document.getElementById('codes-grid-body');
         const btnAdd = document.getElementById('btn-add');
         const limitNote = document.getElementById('limit-note');
-        tbody.innerHTML = '';
+        gridBody.innerHTML = '';
 
         if (state.codes.length === 0) {
-          const tr = document.createElement('tr');
-          const td = document.createElement('td');
-          td.colSpan = 6;
-          td.innerHTML =
-            '<p class="addon-codes-section__empty">No Add-On codes configured. Use the button below to add one.</p>';
-          tr.appendChild(td);
-          tbody.appendChild(tr);
+          const empty = document.createElement('p');
+          empty.className = 'addon-codes-section__empty';
+          empty.textContent =
+            'No Add-On codes configured. Use the button below to add one.';
+          gridBody.appendChild(empty);
         } else {
           state.codes.forEach((row, index) => {
-            const tr = document.createElement('tr');
+            const rowEl = document.createElement('div');
+            rowEl.className = 'codes-grid-row';
+            rowEl.setAttribute('role', 'row');
 
-            const tdSpectrum = document.createElement('td');
+            const cellSpectrum = document.createElement('div');
+            cellSpectrum.setAttribute('role', 'cell');
             const spectrumInput = createTextInput({
               ariaLabel: `Spectrum code row ${index + 1}`,
               maxLength: 32,
@@ -478,9 +487,10 @@
               spectrumInput.value = val;
               updateRow(index, 'spectrum_code', val);
             });
-            tdSpectrum.appendChild(spectrumInput);
+            cellSpectrum.appendChild(spectrumInput);
 
-            const tdLabel = document.createElement('td');
+            const cellLabel = document.createElement('div');
+            cellLabel.setAttribute('role', 'cell');
             const labelInput = createTextInput({
               ariaLabel: `Label row ${index + 1}`,
               maxLength: LABEL_MAX,
@@ -491,10 +501,11 @@
               labelInput.value = val;
               updateRow(index, 'label', val);
             });
-            tdLabel.appendChild(labelInput);
+            cellLabel.appendChild(labelInput);
 
-            const tdYtd = document.createElement('td');
-            tdYtd.className = 'col-toggle';
+            const cellYtd = document.createElement('div');
+            cellYtd.className = 'col-center';
+            cellYtd.setAttribute('role', 'cell');
             const ytdWrap = document.createElement('div');
             ytdWrap.className = 'toggle-cell';
             const ytd = createCheckbox({
@@ -505,10 +516,11 @@
               updateRow(index, 'show_ytd', readCheckboxValue(event));
             });
             ytdWrap.appendChild(ytd);
-            tdYtd.appendChild(ytdWrap);
+            cellYtd.appendChild(ytdWrap);
 
-            const tdAccrued = document.createElement('td');
-            tdAccrued.className = 'col-toggle';
+            const cellAccrued = document.createElement('div');
+            cellAccrued.className = 'col-center';
+            cellAccrued.setAttribute('role', 'cell');
             const accruedWrap = document.createElement('div');
             accruedWrap.className = 'toggle-cell';
             const accrued = createCheckbox({
@@ -519,10 +531,11 @@
               updateRow(index, 'show_accrued', readCheckboxValue(event));
             });
             accruedWrap.appendChild(accrued);
-            tdAccrued.appendChild(accruedWrap);
+            cellAccrued.appendChild(accruedWrap);
 
-            const tdOnCheck = document.createElement('td');
-            tdOnCheck.className = 'col-toggle';
+            const cellOnCheck = document.createElement('div');
+            cellOnCheck.className = 'col-center';
+            cellOnCheck.setAttribute('role', 'cell');
             const onCheckWrap = document.createElement('div');
             onCheckWrap.className = 'toggle-cell';
             const onCheck = createCheckbox({
@@ -533,17 +546,25 @@
               updateRow(index, 'show_on_check', readCheckboxValue(event));
             });
             onCheckWrap.appendChild(onCheck);
-            tdOnCheck.appendChild(onCheckWrap);
+            cellOnCheck.appendChild(onCheckWrap);
 
-            const tdActions = document.createElement('td');
-            tdActions.className = 'col-actions';
+            const cellActions = document.createElement('div');
+            cellActions.className = 'col-center';
+            cellActions.setAttribute('role', 'cell');
             const actionsWrap = document.createElement('div');
             actionsWrap.className = 'toggle-cell';
             actionsWrap.appendChild(createRemoveButton(index));
-            tdActions.appendChild(actionsWrap);
+            cellActions.appendChild(actionsWrap);
 
-            tr.append(tdSpectrum, tdLabel, tdYtd, tdAccrued, tdOnCheck, tdActions);
-            tbody.appendChild(tr);
+            rowEl.append(
+              cellSpectrum,
+              cellLabel,
+              cellYtd,
+              cellAccrued,
+              cellOnCheck,
+              cellActions,
+            );
+            gridBody.appendChild(rowEl);
           });
         }
 
@@ -574,10 +595,26 @@
         });
       }
 
-      await defineCustomElements();
-      initShell();
-      bindEvents();
-      render();
+      try {
+        await defineCustomElements();
+        await Promise.all([
+          customElements.whenDefined('modus-wc-tabs'),
+          customElements.whenDefined('modus-wc-collapse'),
+          customElements.whenDefined('modus-wc-text-input'),
+        ]);
+        initShell();
+        bindEvents();
+        render();
+      } catch (error) {
+        console.error('Failed to initialize Modus Web Components', error);
+        const banner = document.getElementById('preview-banner');
+        if (banner) {
+          banner.type = 'danger';
+          banner.alertTitle = 'Prototype failed to load';
+          banner.alertDescription =
+            'Modus Web Components could not be initialized. Check your network connection and reload.';
+        }
+      }
     </script>
   </body>
 </html>
