@@ -30,17 +30,57 @@
       }
 
       .settings-card {
-        display: block;
-        width: 100%;
+        background: var(--modus-wc-color-base-0, #fff);
+        border: 1px solid var(--modus-wc-color-base-300, #e5e5e5);
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+        overflow: hidden;
       }
 
-      .settings-tabs {
-        display: block;
-        margin-bottom: 0;
+      .tab-bar {
+        display: flex;
+        gap: 0;
+        border-bottom: 1px solid var(--modus-wc-color-base-300, #e5e5e5);
+        padding: 0 1rem;
       }
 
-      .accordion-wrap {
-        padding: 0 1rem 1rem;
+      .tab-bar__item {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--modus-wc-color-base-content-secondary, #525252);
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+      }
+
+      .tab-bar__item--active {
+        color: var(--modus-wc-color-primary, #0063a3);
+        border-bottom-color: var(--modus-wc-color-primary, #0063a3);
+      }
+
+      .template-header {
+        padding: 1rem 1.25rem;
+        background: var(--modus-wc-color-base-200, #f5f5f5);
+        border-bottom: 1px solid var(--modus-wc-color-base-300, #e5e5e5);
+      }
+
+      .template-header__title {
+        margin: 0;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--modus-wc-color-base-content, #171717);
+      }
+
+      .template-header__subtitle {
+        margin: 0.25rem 0 0;
+        font-size: 0.8125rem;
+        color: var(--modus-wc-color-base-content-secondary, #525252);
+      }
+
+      .template-body {
+        padding: 1.25rem;
       }
 
       .stub-section {
@@ -250,32 +290,34 @@
         ></modus-wc-typography>
       </header>
 
-      <modus-wc-card class="settings-card" bordered padding="comfortable">
-        <modus-wc-tabs
-          id="settings-tabs"
-          class="settings-tabs"
-          aria-label="Earning settings tabs"
-          tab-style="bordered"
-          size="md"
-        ></modus-wc-tabs>
+      <div class="settings-card">
+        <nav class="tab-bar" aria-label="Earning settings tabs">
+          <span class="tab-bar__item tab-bar__item--active">General Settings</span>
+          <span class="tab-bar__item">1095-C Forms</span>
+          <span class="tab-bar__item">W-2 Forms</span>
+        </nav>
 
-        <div class="accordion-wrap">
-          <modus-wc-accordion id="template-accordion">
-            <modus-wc-collapse id="earning-template-collapse" expanded bordered>
-              <div slot="content">
-                <section class="stub-section" aria-hidden="true">
-                  <modus-wc-typography hierarchy="h4" label="Time off fields"></modus-wc-typography>
-                  <p class="addon-codes-section__helper">
-                    Check which time off types you would like to display on paycheck
-                  </p>
-                  <div class="checkbox-row" id="time-off-checkboxes">
-                    <modus-wc-checkbox label="Vacation (V)"></modus-wc-checkbox>
-                    <modus-wc-checkbox label="Holiday (H)"></modus-wc-checkbox>
-                    <modus-wc-checkbox label="Sick (S)"></modus-wc-checkbox>
-                  </div>
-                </section>
+        <div class="template-header">
+          <p class="template-header__title">Earning Statement Template</p>
+          <p class="template-header__subtitle">
+            Configure what information to display on earning statement
+          </p>
+        </div>
 
-                <section class="addon-codes-section" aria-labelledby="addon-codes-title">
+        <div class="template-body">
+          <section class="stub-section" aria-hidden="true">
+            <modus-wc-typography hierarchy="h4" label="Time off fields"></modus-wc-typography>
+            <p class="addon-codes-section__helper">
+              Check which time off types you would like to display on paycheck
+            </p>
+            <div class="checkbox-row" id="time-off-checkboxes">
+              <modus-wc-checkbox label="Vacation (V)"></modus-wc-checkbox>
+              <modus-wc-checkbox label="Holiday (H)"></modus-wc-checkbox>
+              <modus-wc-checkbox label="Sick (S)"></modus-wc-checkbox>
+            </div>
+          </section>
+
+          <section class="addon-codes-section" aria-labelledby="addon-codes-title">
                   <span id="addon-codes-title" class="visually-hidden">Add-On Codes</span>
 
                   <div class="addon-codes-section__heading-row">
@@ -328,20 +370,17 @@
                     </modus-wc-button>
                     <p id="limit-note">Maximum of 20 Add-On codes reached.</p>
                   </div>
-                </section>
-              </div>
-            </modus-wc-collapse>
-          </modus-wc-accordion>
-        </div>
+          </section>
 
-        <div class="payload-panel">
-          <modus-wc-typography
-            hierarchy="label"
-            label="Live save payload (company / entity settings)"
-          ></modus-wc-typography>
-          <pre id="payload-json"></pre>
+          <div class="payload-panel">
+            <modus-wc-typography
+              hierarchy="label"
+              label="Live save payload (company / entity settings)"
+            ></modus-wc-typography>
+            <pre id="payload-json"></pre>
+          </div>
         </div>
-      </modus-wc-card>
+      </div>
     </div>
 
     <script type="module">
@@ -407,23 +446,6 @@
       }
 
       function initShell() {
-        const tabs = document.getElementById('settings-tabs');
-        tabs.tabs = [
-          { label: 'General Settings' },
-          { label: '1095-C Forms' },
-          { label: 'W-2 Forms' },
-        ];
-        tabs.activeTabIndex = 0;
-
-        const collapse = document.getElementById('earning-template-collapse');
-        collapse.expanded = true;
-        collapse.options = {
-          title: 'EARNING STATEMENT TEMPLATE',
-          description: 'Configure what information to display on earning statement',
-          icon: 'list',
-          iconAriaLabel: 'Earning statement template',
-        };
-
         document
           .querySelectorAll('#time-off-checkboxes modus-wc-checkbox')
           .forEach((checkbox) => {
@@ -576,45 +598,47 @@
 
       function bindEvents() {
         const sectionTitle = document.getElementById('section-title');
-        sectionTitle.addEventListener('inputChange', (event) => {
-          state.section_title = readInputValue(event).slice(0, 100);
-          sectionTitle.value = state.section_title;
-          renderPayload();
-        });
-
-        document.getElementById('btn-add').addEventListener('buttonClick', () => {
-          if (state.codes.length >= MAX_ROWS) return;
-          state.codes.push({
-            spectrum_code: '',
-            label: '',
-            show_ytd: false,
-            show_accrued: false,
-            show_on_check: false,
+        if (sectionTitle) {
+          sectionTitle.addEventListener('inputChange', (event) => {
+            state.section_title = readInputValue(event).slice(0, 100);
+            sectionTitle.value = state.section_title;
+            renderPayload();
           });
-          render();
-        });
+        }
+
+        const btnAdd = document.getElementById('btn-add');
+        if (btnAdd) {
+          btnAdd.addEventListener('buttonClick', () => {
+            if (state.codes.length >= MAX_ROWS) return;
+            state.codes.push({
+              spectrum_code: '',
+              label: '',
+              show_ytd: false,
+              show_accrued: false,
+              show_on_check: false,
+            });
+            render();
+          });
+        }
       }
 
-      try {
+      async function boot() {
         await defineCustomElements();
-        await Promise.all([
-          customElements.whenDefined('modus-wc-tabs'),
-          customElements.whenDefined('modus-wc-collapse'),
-          customElements.whenDefined('modus-wc-text-input'),
-        ]);
+        await customElements.whenDefined('modus-wc-text-input');
         initShell();
         bindEvents();
         render();
-      } catch (error) {
+      }
+
+      boot().catch((error) => {
         console.error('Failed to initialize Modus Web Components', error);
         const banner = document.getElementById('preview-banner');
         if (banner) {
           banner.type = 'danger';
           banner.alertTitle = 'Prototype failed to load';
-          banner.alertDescription =
-            'Modus Web Components could not be initialized. Check your network connection and reload.';
+          banner.alertDescription = String(error);
         }
-      }
+      });
     </script>
   </body>
 </html>
