@@ -1,53 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="modus-modern-light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add-On Codes — Earning Settings Preview</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@trimble-oss/moduswebcomponents@1.5.0/modus-wc-styles.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@trimble-oss/moduswebcomponents@1.5.0/modus-icons.css"
     />
     <style>
-      :root {
-        --primary-500: #0ea5e9;
-        --primary-600: #0284c7;
-        --primary-700: #0369a1;
-        --neutral-50: #fafafa;
-        --neutral-100: #f5f5f5;
-        --neutral-200: #e5e5e5;
-        --neutral-300: #d4d4d4;
-        --neutral-500: #737373;
-        --neutral-600: #525252;
-        --neutral-700: #404040;
-        --neutral-900: #171717;
-        --white: #ffffff;
-        --page-bg: #f1f5f9;
-        --nav-blue: #003f7f;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
       body {
         margin: 0;
-        font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-          sans-serif;
-        font-size: 1rem;
-        line-height: 1.5;
-        color: var(--neutral-900);
-        background: var(--page-bg);
-      }
-
-      .preview-banner {
-        background: #0c4a6e;
-        color: var(--white);
-        padding: 0.5rem 1.5rem;
-        font-size: 0.8125rem;
-        text-align: center;
+        min-height: 100vh;
+        background: var(--modus-wc-color-base-100, #f1f5f9);
       }
 
       .page {
@@ -56,143 +25,51 @@
         padding: 1.5rem;
       }
 
-      .page-header h1 {
-        margin: 0 0 0.25rem;
-        font-size: 1.75rem;
-        font-weight: 600;
+      .page-header {
+        margin-bottom: 1.25rem;
       }
 
-      .page-header p {
-        margin: 0 0 1.5rem;
-        color: var(--neutral-600);
-        font-size: 0.875rem;
+      .settings-card {
+        display: block;
+        width: 100%;
       }
 
-      .card {
-        background: var(--white);
-        border: 1px solid var(--neutral-200);
-        border-radius: 0.5rem;
-        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+      .settings-tabs {
+        display: block;
+        margin-bottom: 0;
       }
 
-      .tabs {
-        display: flex;
-        gap: 0;
-        border-bottom: 1px solid var(--neutral-200);
-        padding: 0 1rem;
-      }
-
-      .tab {
-        padding: 0.875rem 1.25rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: var(--neutral-600);
-        border-bottom: 2px solid transparent;
-        margin-bottom: -1px;
-      }
-
-      .tab.active {
-        color: var(--primary-600);
-        border-bottom-color: var(--primary-600);
-      }
-
-      .accordion {
-        margin: 1.5rem;
-        border: 1px solid var(--neutral-200);
-        border-radius: 0.375rem;
-        overflow: hidden;
-      }
-
-      .accordion-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1rem 1.25rem;
-        background: var(--neutral-100);
-        border-bottom: 1px solid var(--neutral-200);
-      }
-
-      .accordion-header h2 {
-        margin: 0;
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-
-      .accordion-header .subtitle {
-        margin: 0.25rem 0 0;
-        font-size: 0.8125rem;
-        font-weight: 400;
-        color: var(--neutral-600);
-        text-transform: none;
-        letter-spacing: normal;
-      }
-
-      .accordion-body {
-        padding: 1.5rem 1.25rem 2rem;
+      .accordion-wrap {
+        padding: 0 1rem 1rem;
       }
 
       .stub-section {
-        margin-bottom: 2rem;
-        padding-bottom: 2rem;
-        border-bottom: 1px solid var(--neutral-100);
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--modus-wc-color-base-300, #e5e5e5);
       }
 
-      .stub-section h3 {
-        margin: 0 0 0.375rem;
-        font-size: 0.875rem;
-        font-weight: 600;
-      }
-
-      .stub-section .hint {
-        margin: 0 0 1rem;
-        font-size: 0.8125rem;
-        color: var(--neutral-600);
+      .stub-section modus-wc-typography {
+        display: block;
+        margin-bottom: 0.25rem;
       }
 
       .checkbox-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 1.5rem;
-      }
-
-      .checkbox-row label {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.875rem;
-        cursor: default;
-      }
-
-      .checkbox-row input {
-        width: 1rem;
-        height: 1rem;
-        accent-color: var(--primary-600);
-      }
-
-      /* Add-On Codes section */
-      .visually-hidden {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
+        gap: 1.25rem;
+        margin-top: 0.75rem;
       }
 
       .addon-codes-section {
-        margin-top: 0;
+        margin-top: 0.5rem;
       }
 
       .addon-codes-section__heading-row {
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
-        gap: 0.5rem 0.75rem;
+        gap: 0.75rem 1rem;
         margin-bottom: 0.5rem;
       }
 
@@ -200,11 +77,8 @@
         display: flex;
         align-items: center;
         gap: 0.375rem;
-        flex-shrink: 0;
         padding-top: 1.75rem;
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--neutral-900);
+        flex-shrink: 0;
       }
 
       .addon-codes-section__title-field {
@@ -213,101 +87,28 @@
         max-width: 28rem;
       }
 
-      .field label {
-        display: block;
-        margin-bottom: 0.375rem;
-        font-size: 0.75rem;
-        font-weight: 500;
-        color: var(--neutral-700);
-      }
-
-      .field input[type='text'] {
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        font-size: 0.875rem;
-        font-family: inherit;
-        color: var(--neutral-900);
-        background: var(--white);
-        border: 1px solid var(--neutral-300);
-        border-radius: 0.375rem;
-        transition: border-color 0.2s, box-shadow 0.2s;
-      }
-
-      .field input[type='text']:focus {
-        outline: none;
-        border-color: var(--primary-500);
-        box-shadow: 0 0 0 3px rgb(14 165 233 / 0.1);
-      }
-
       .addon-codes-section__helper {
-        margin: 0 0 1.25rem;
+        margin: 0 0 1rem;
+        color: var(--modus-wc-color-base-content-secondary, #525252);
         font-size: 0.8125rem;
-        color: var(--neutral-600);
       }
 
-      .info-wrap {
-        position: relative;
-        display: inline-flex;
-      }
-
-      .info-btn {
+      .info-trigger {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 1.25rem;
-        height: 1.25rem;
         padding: 0;
         border: none;
-        border-radius: 50%;
         background: transparent;
-        color: var(--primary-600);
         cursor: help;
-        font-size: 0.875rem;
-        font-weight: 700;
-        line-height: 1;
-      }
-
-      .info-btn:hover + .tooltip,
-      .info-btn:focus + .tooltip {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .tooltip {
-        position: absolute;
-        left: 50%;
-        bottom: calc(100% + 0.5rem);
-        transform: translateX(-50%);
-        width: 16rem;
-        padding: 0.5rem 0.75rem;
-        font-size: 0.75rem;
-        font-weight: 400;
-        line-height: 1.4;
-        color: var(--white);
-        background: var(--neutral-900);
-        border-radius: 0.375rem;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.15s;
-        z-index: 10;
-        pointer-events: none;
-      }
-
-      .tooltip::after {
-        content: '';
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -4px;
-        border: 4px solid transparent;
-        border-top-color: var(--neutral-900);
+        line-height: 0;
       }
 
       .addon-codes-section__grid-wrap {
         overflow-x: auto;
-        border: 1px solid var(--neutral-200);
+        border: 1px solid var(--modus-wc-color-base-300, #e5e5e5);
         border-radius: 0.5rem;
-        background: var(--white);
+        background: var(--modus-wc-color-base-0, #fff);
       }
 
       .addon-codes-section__grid {
@@ -321,148 +122,88 @@
         font-size: 0.75rem;
         font-weight: 600;
         text-align: left;
-        color: var(--neutral-700);
-        background: var(--neutral-50);
-        border-bottom: 1px solid var(--neutral-200);
+        color: var(--modus-wc-color-base-content-secondary, #404040);
+        background: var(--modus-wc-color-base-200, #fafafa);
+        border-bottom: 1px solid var(--modus-wc-color-base-300, #e5e5e5);
         white-space: nowrap;
       }
 
       .addon-codes-section__grid thead th.col-toggle,
-      .addon-codes-section__grid thead th.col-actions {
+      .addon-codes-section__grid tbody td.col-toggle,
+      .addon-codes-section__grid tbody td.col-actions {
         text-align: center;
       }
 
       .addon-codes-section__grid tbody td {
         padding: 0.75rem 1rem;
         vertical-align: middle;
-        border-bottom: 1px solid var(--neutral-100);
+        border-bottom: 1px solid var(--modus-wc-color-base-200, #f5f5f5);
       }
 
       .addon-codes-section__grid tbody tr:last-child td {
         border-bottom: none;
       }
 
-      .addon-codes-section__grid .col-toggle,
-      .addon-codes-section__grid .col-actions {
-        text-align: center;
-      }
-
-      .addon-codes-section__grid input[type='text'] {
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        font-size: 0.875rem;
-        border: 1px solid var(--neutral-300);
-        border-radius: 0.375rem;
-      }
-
-      .addon-codes-section__grid input[type='text']:focus {
-        outline: none;
-        border-color: var(--primary-500);
-        box-shadow: 0 0 0 3px rgb(14 165 233 / 0.1);
-      }
-
-      .spectrum-input {
-        text-transform: uppercase;
-      }
-
-      .addon-codes-section__grid input[type='checkbox'] {
-        width: 1rem;
-        height: 1rem;
-        accent-color: var(--primary-600);
-        cursor: pointer;
-      }
-
-      .btn-remove {
-        display: inline-flex;
-        align-items: center;
+      .toggle-cell {
+        display: flex;
         justify-content: center;
-        width: 2rem;
-        height: 2rem;
-        padding: 0;
-        border: none;
-        border-radius: 0.375rem;
-        background: transparent;
-        color: var(--neutral-600);
-        cursor: pointer;
       }
 
-      .btn-remove:hover {
-        background: var(--neutral-100);
-        color: #dc2626;
-      }
-
-      .btn-remove svg {
-        width: 1.125rem;
-        height: 1.125rem;
+      .spectrum-uppercase {
+        text-transform: uppercase;
       }
 
       .addon-codes-section__empty {
         padding: 1.5rem 1rem;
         text-align: center;
+        color: var(--modus-wc-color-base-content-tertiary, #737373);
         font-size: 0.875rem;
-        color: var(--neutral-500);
       }
 
       .addon-codes-section__actions {
         margin-top: 1rem;
-      }
-
-      .btn-add {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.375rem;
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        font-family: inherit;
-        color: var(--primary-600);
-        background: var(--white);
-        border: 1px solid var(--primary-600);
-        border-radius: 0.375rem;
-        cursor: pointer;
-        transition: background 0.2s;
-      }
-
-      .btn-add:hover:not(:disabled) {
-        background: #f0f9ff;
-      }
-
-      .btn-add:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      .addon-codes-section__limit-note {
-        margin: 0.5rem 0 0;
-        font-size: 0.75rem;
-        color: var(--neutral-500);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
       }
 
       .payload-panel {
-        margin: 0 1.5rem 1.5rem;
-        padding: 1rem 1.25rem;
-        background: var(--neutral-50);
-        border: 1px solid var(--neutral-200);
+        margin-top: 1rem;
+        padding: 1rem;
+        background: var(--modus-wc-color-base-200, #fafafa);
+        border: 1px solid var(--modus-wc-color-base-300, #e5e5e5);
         border-radius: 0.5rem;
       }
 
-      .payload-panel h3 {
-        margin: 0 0 0.75rem;
-        font-size: 0.8125rem;
-        font-weight: 600;
-        color: var(--neutral-700);
-      }
-
       .payload-panel pre {
-        margin: 0;
+        margin: 0.75rem 0 0;
         padding: 1rem;
         font-size: 0.75rem;
         line-height: 1.5;
-        font-family: 'JetBrains Mono', Monaco, Consolas, monospace;
-        background: var(--white);
-        border: 1px solid var(--neutral-200);
+        font-family: ui-monospace, 'JetBrains Mono', Monaco, Consolas, monospace;
+        background: var(--modus-wc-color-base-0, #fff);
+        border: 1px solid var(--modus-wc-color-base-300, #e5e5e5);
         border-radius: 0.375rem;
         overflow-x: auto;
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      #limit-note {
+        display: none;
+        font-size: 0.75rem;
+        color: var(--modus-wc-color-base-content-tertiary, #737373);
       }
 
       @media (max-width: 768px) {
@@ -481,125 +222,123 @@
     </style>
   </head>
   <body>
-    <div class="preview-banner">
-      Local preview — open this file directly in your browser. No build step required.
-    </div>
+    <modus-wc-alert
+      id="preview-banner"
+      type="info"
+      alert-title="Modus Web Components prototype"
+      alert-description="Add-On Codes preview using @trimble-oss/moduswebcomponents 1.5.0"
+    ></modus-wc-alert>
 
     <div class="page">
       <header class="page-header">
-        <h1>Admin Settings — Earning Settings</h1>
-        <p>General Settings → Earning Statement Template (Add-On Codes section)</p>
+        <modus-wc-typography hierarchy="h2" label="Admin Settings — Earning Settings"></modus-wc-typography>
+        <modus-wc-typography
+          hierarchy="body"
+          label="General Settings → Earning Statement Template (Add-On Codes section)"
+        ></modus-wc-typography>
       </header>
 
-      <div class="card">
-        <div class="tabs">
-          <div class="tab active">General Settings</div>
-          <div class="tab">1095-C Forms</div>
-          <div class="tab">W-2 Forms</div>
-        </div>
+      <modus-wc-card class="settings-card" bordered padding="comfortable">
+        <modus-wc-tabs
+          id="settings-tabs"
+          class="settings-tabs"
+          aria-label="Earning settings tabs"
+          tab-style="bordered"
+          size="md"
+        ></modus-wc-tabs>
 
-        <div class="accordion">
-          <div class="accordion-header">
-            <div>
-              <h2>Earning Statement Template</h2>
-              <p class="subtitle">
-                Configure what information to display on earning statement
-              </p>
-            </div>
-            <span aria-hidden="true">▲</span>
-          </div>
+        <div class="accordion-wrap">
+          <modus-wc-accordion id="template-accordion">
+            <modus-wc-collapse id="earning-template-collapse" expanded bordered>
+              <div slot="content">
+                <section class="stub-section" aria-hidden="true">
+                  <modus-wc-typography hierarchy="h4" label="Time off fields"></modus-wc-typography>
+                  <p class="addon-codes-section__helper">
+                    Check which time off types you would like to display on paycheck
+                  </p>
+                  <div class="checkbox-row" id="time-off-checkboxes">
+                    <modus-wc-checkbox label="Vacation (V)"></modus-wc-checkbox>
+                    <modus-wc-checkbox label="Holiday (H)"></modus-wc-checkbox>
+                    <modus-wc-checkbox label="Sick (S)"></modus-wc-checkbox>
+                  </div>
+                </section>
 
-          <div class="accordion-body">
-            <!-- Stub: Time off fields (anchor above Add-On Codes) -->
-            <section class="stub-section" aria-hidden="true">
-              <h3>Time off fields</h3>
-              <p class="hint">
-                Check which time off types you would like to display on paycheck
-              </p>
-              <div class="checkbox-row">
-                <label><input type="checkbox" checked disabled /> Vacation (V)</label>
-                <label><input type="checkbox" checked disabled /> Holiday (H)</label>
-                <label><input type="checkbox" checked disabled /> Sick (S)</label>
+                <section class="addon-codes-section" aria-labelledby="addon-codes-title">
+                  <span id="addon-codes-title" class="visually-hidden">Add-On Codes</span>
+
+                  <div class="addon-codes-section__heading-row">
+                    <div class="addon-codes-section__section-label">
+                      <modus-wc-typography hierarchy="label" label="Add-On Codes"></modus-wc-typography>
+                      <modus-wc-tooltip
+                        id="addon-info-tooltip"
+                        content="Configure specific Add-On codes from Spectrum to display as monetary balances on employee paystubs."
+                        position="top"
+                      >
+                        <button type="button" class="info-trigger" aria-label="About Add-On codes">
+                          <modus-wc-icon decorative name="info" size="sm"></modus-wc-icon>
+                        </button>
+                      </modus-wc-tooltip>
+                    </div>
+
+                    <div class="addon-codes-section__title-field">
+                      <modus-wc-text-input
+                        id="section-title"
+                        label="Section Title"
+                        max-length="100"
+                        value="Accrued Balance Information"
+                      ></modus-wc-text-input>
+                    </div>
+                  </div>
+
+                  <p class="addon-codes-section__helper">
+                    Map Spectrum Add-On codes to labels and choose which monetary balances appear on
+                    employee paystubs.
+                  </p>
+
+                  <div class="addon-codes-section__grid-wrap">
+                    <table class="addon-codes-section__grid">
+                      <thead>
+                        <tr>
+                          <th scope="col">Spectrum Code</th>
+                          <th scope="col">Label</th>
+                          <th scope="col" class="col-toggle">Display YTD</th>
+                          <th scope="col" class="col-toggle">Display Accrued</th>
+                          <th scope="col" class="col-toggle">Display On Check</th>
+                          <th scope="col" class="col-actions">
+                            <span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Actions</span>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="codes-tbody"></tbody>
+                    </table>
+                  </div>
+
+                  <div class="addon-codes-section__actions">
+                    <modus-wc-button id="btn-add" color="primary" variant="outlined" size="md">
+                      <modus-wc-icon decorative name="add" size="sm"></modus-wc-icon>
+                      + Add Add-On Code
+                    </modus-wc-button>
+                    <p id="limit-note">Maximum of 20 Add-On codes reached.</p>
+                  </div>
+                </section>
               </div>
-            </section>
-
-            <!-- Add-On Codes (interactive) -->
-            <section class="addon-codes-section" aria-labelledby="addon-codes-title">
-              <h3 id="addon-codes-title" class="visually-hidden">Add-On Codes</h3>
-
-              <div class="addon-codes-section__heading-row">
-                <div class="addon-codes-section__section-label">
-                  <span>Add-On Codes</span>
-                  <span class="info-wrap">
-                    <button
-                      type="button"
-                      class="info-btn"
-                      aria-label="About Add-On codes"
-                      aria-describedby="addon-tooltip"
-                    >
-                      i
-                    </button>
-                    <span id="addon-tooltip" class="tooltip" role="tooltip">
-                      Configure specific Add-On codes from Spectrum to display as
-                      monetary balances on employee paystubs.
-                    </span>
-                  </span>
-                </div>
-
-                <div class="addon-codes-section__title-field field">
-                  <label for="section-title">Section Title</label>
-                  <input
-                    type="text"
-                    id="section-title"
-                    maxlength="100"
-                    value="Accrued Balance Information"
-                  />
-                </div>
-              </div>
-
-              <p class="addon-codes-section__helper">
-                Map Spectrum Add-On codes to labels and choose which monetary balances
-                appear on employee paystubs.
-              </p>
-
-              <div class="addon-codes-section__grid-wrap">
-                <table class="addon-codes-section__grid">
-                  <thead>
-                    <tr>
-                      <th scope="col">Spectrum Code</th>
-                      <th scope="col">Label</th>
-                      <th scope="col" class="col-toggle">Display YTD</th>
-                      <th scope="col" class="col-toggle">Display Accrued</th>
-                      <th scope="col" class="col-toggle">Display On Check</th>
-                      <th scope="col" class="col-actions">
-                        <span class="visually-hidden">Actions</span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody id="codes-tbody"></tbody>
-                </table>
-              </div>
-
-              <div class="addon-codes-section__actions">
-                <button type="button" class="btn-add" id="btn-add">
-                  <span aria-hidden="true">+</span> Add Add-On Code
-                </button>
-                <p class="addon-codes-section__limit-note" id="limit-note" hidden>
-                  Maximum of 20 Add-On codes reached.
-                </p>
-              </div>
-            </section>
-          </div>
+            </modus-wc-collapse>
+          </modus-wc-accordion>
         </div>
 
         <div class="payload-panel">
-          <h3>Live save payload (company / entity settings)</h3>
+          <modus-wc-typography
+            hierarchy="label"
+            label="Live save payload (company / entity settings)"
+          ></modus-wc-typography>
           <pre id="payload-json"></pre>
         </div>
-      </div>
+      </modus-wc-card>
     </div>
 
-    <script>
+    <script type="module">
+      import { defineCustomElements } from 'https://cdn.jsdelivr.net/npm/@trimble-oss/moduswebcomponents@1.5.0/loader/index.js';
+
       const MAX_ROWS = 20;
       const LABEL_MAX = 50;
 
@@ -616,37 +355,73 @@
         ],
       };
 
-      const sectionTitleEl = document.getElementById('section-title');
-      const tbody = document.getElementById('codes-tbody');
-      const btnAdd = document.getElementById('btn-add');
-      const limitNote = document.getElementById('limit-note');
-      const payloadEl = document.getElementById('payload-json');
-
-      sectionTitleEl.addEventListener('input', () => {
-        state.section_title = sectionTitleEl.value.slice(0, 100);
-        renderPayload();
-      });
-
-      btnAdd.addEventListener('click', () => {
-        if (state.codes.length >= MAX_ROWS) return;
-        state.codes.push({
-          spectrum_code: '',
-          label: '',
-          show_ytd: false,
-          show_accrued: false,
-          show_on_check: false,
-        });
-        render();
-      });
-
-      function removeRow(index) {
-        state.codes.splice(index, 1);
-        render();
+      function readInputValue(event) {
+        return event.target?.value ?? '';
       }
 
-      function updateRow(index, field, value) {
-        state.codes[index][field] = value;
-        renderPayload();
+      function readCheckboxValue(event) {
+        return Boolean(event.target?.value);
+      }
+
+      function createTextInput({ id, label, ariaLabel, maxLength, value, uppercase }) {
+        const el = document.createElement('modus-wc-text-input');
+        if (id) el.inputId = id;
+        if (label) el.label = label;
+        if (ariaLabel) el.setAttribute('aria-label', ariaLabel);
+        if (maxLength) el.maxLength = maxLength;
+        el.value = value ?? '';
+        if (uppercase) el.customClass = 'spectrum-uppercase';
+        return el;
+      }
+
+      function createCheckbox({ id, ariaLabel, checked }) {
+        const el = document.createElement('modus-wc-checkbox');
+        if (id) el.inputId = id;
+        if (ariaLabel) el.setAttribute('aria-label', ariaLabel);
+        el.value = Boolean(checked);
+        return el;
+      }
+
+      function createRemoveButton(index) {
+        const btn = document.createElement('modus-wc-button');
+        btn.setAttribute('aria-label', `Remove Add-On code row ${index + 1}`);
+        btn.color = 'tertiary';
+        btn.variant = 'borderless';
+        btn.size = 'sm';
+        btn.shape = 'square';
+        btn.addEventListener('buttonClick', () => removeRow(index));
+        const icon = document.createElement('modus-wc-icon');
+        icon.setAttribute('decorative', '');
+        icon.name = 'delete';
+        icon.size = 'sm';
+        btn.appendChild(icon);
+        return btn;
+      }
+
+      function initShell() {
+        const tabs = document.getElementById('settings-tabs');
+        tabs.tabs = [
+          { label: 'General Settings' },
+          { label: '1095-C Forms' },
+          { label: 'W-2 Forms' },
+        ];
+        tabs.activeTabIndex = 0;
+
+        const collapse = document.getElementById('earning-template-collapse');
+        collapse.expanded = true;
+        collapse.options = {
+          title: 'EARNING STATEMENT TEMPLATE',
+          description: 'Configure what information to display on earning statement',
+          icon: 'list',
+          iconAriaLabel: 'Earning statement template',
+        };
+
+        document
+          .querySelectorAll('#time-off-checkboxes modus-wc-checkbox')
+          .forEach((checkbox) => {
+            checkbox.value = true;
+            checkbox.disabled = true;
+          });
       }
 
       function renderPayload() {
@@ -660,89 +435,148 @@
             show_on_check: row.show_on_check,
           })),
         };
-        payloadEl.textContent = JSON.stringify(payload, null, 2);
+        document.getElementById('payload-json').textContent = JSON.stringify(payload, null, 2);
+      }
+
+      function removeRow(index) {
+        state.codes.splice(index, 1);
+        render();
+      }
+
+      function updateRow(index, field, value) {
+        state.codes[index][field] = value;
+        renderPayload();
       }
 
       function render() {
+        const tbody = document.getElementById('codes-tbody');
+        const btnAdd = document.getElementById('btn-add');
+        const limitNote = document.getElementById('limit-note');
         tbody.innerHTML = '';
 
         if (state.codes.length === 0) {
           const tr = document.createElement('tr');
-          tr.innerHTML =
-            '<td colspan="6"><p class="addon-codes-section__empty">No Add-On codes configured. Use the button below to add one.</p></td>';
+          const td = document.createElement('td');
+          td.colSpan = 6;
+          td.innerHTML =
+            '<p class="addon-codes-section__empty">No Add-On codes configured. Use the button below to add one.</p>';
+          tr.appendChild(td);
           tbody.appendChild(tr);
         } else {
           state.codes.forEach((row, index) => {
             const tr = document.createElement('tr');
 
-            tr.innerHTML = `
-              <td>
-                <input type="text" class="spectrum-input" data-field="spectrum_code" maxlength="32" value="${escapeAttr(row.spectrum_code)}" aria-label="Spectrum code row ${index + 1}" />
-              </td>
-              <td>
-                <input type="text" data-field="label" maxlength="${LABEL_MAX}" value="${escapeAttr(row.label)}" aria-label="Label row ${index + 1}" />
-              </td>
-              <td class="col-toggle">
-                <input type="checkbox" data-field="show_ytd" ${row.show_ytd ? 'checked' : ''} aria-label="Display YTD row ${index + 1}" />
-              </td>
-              <td class="col-toggle">
-                <input type="checkbox" data-field="show_accrued" ${row.show_accrued ? 'checked' : ''} aria-label="Display accrued row ${index + 1}" />
-              </td>
-              <td class="col-toggle">
-                <input type="checkbox" data-field="show_on_check" ${row.show_on_check ? 'checked' : ''} aria-label="Display on check row ${index + 1}" />
-              </td>
-              <td class="col-actions">
-                <button type="button" class="btn-remove" data-remove="${index}" aria-label="Remove row ${index + 1}">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14zM10 11v6M14 11v6"/>
-                  </svg>
-                </button>
-              </td>
-            `;
-
-            tr.querySelectorAll('input[type="text"]').forEach((input) => {
-              input.addEventListener('input', () => {
-                let val = input.value;
-                if (input.dataset.field === 'spectrum_code') {
-                  val = val.toUpperCase();
-                  input.value = val;
-                }
-                if (input.dataset.field === 'label') {
-                  val = val.slice(0, LABEL_MAX);
-                  input.value = val;
-                }
-                updateRow(index, input.dataset.field, val);
-              });
+            const tdSpectrum = document.createElement('td');
+            const spectrumInput = createTextInput({
+              ariaLabel: `Spectrum code row ${index + 1}`,
+              maxLength: 32,
+              value: row.spectrum_code,
+              uppercase: true,
             });
-
-            tr.querySelectorAll('input[type="checkbox"]').forEach((input) => {
-              input.addEventListener('change', () => {
-                updateRow(index, input.dataset.field, input.checked);
-              });
+            spectrumInput.addEventListener('inputChange', (event) => {
+              const val = readInputValue(event).toUpperCase();
+              spectrumInput.value = val;
+              updateRow(index, 'spectrum_code', val);
             });
+            tdSpectrum.appendChild(spectrumInput);
 
-            tr.querySelector('[data-remove]').addEventListener('click', () => {
-              removeRow(index);
+            const tdLabel = document.createElement('td');
+            const labelInput = createTextInput({
+              ariaLabel: `Label row ${index + 1}`,
+              maxLength: LABEL_MAX,
+              value: row.label,
             });
+            labelInput.addEventListener('inputChange', (event) => {
+              const val = readInputValue(event).slice(0, LABEL_MAX);
+              labelInput.value = val;
+              updateRow(index, 'label', val);
+            });
+            tdLabel.appendChild(labelInput);
 
+            const tdYtd = document.createElement('td');
+            tdYtd.className = 'col-toggle';
+            const ytdWrap = document.createElement('div');
+            ytdWrap.className = 'toggle-cell';
+            const ytd = createCheckbox({
+              ariaLabel: `Display YTD row ${index + 1}`,
+              checked: row.show_ytd,
+            });
+            ytd.addEventListener('inputChange', (event) => {
+              updateRow(index, 'show_ytd', readCheckboxValue(event));
+            });
+            ytdWrap.appendChild(ytd);
+            tdYtd.appendChild(ytdWrap);
+
+            const tdAccrued = document.createElement('td');
+            tdAccrued.className = 'col-toggle';
+            const accruedWrap = document.createElement('div');
+            accruedWrap.className = 'toggle-cell';
+            const accrued = createCheckbox({
+              ariaLabel: `Display accrued row ${index + 1}`,
+              checked: row.show_accrued,
+            });
+            accrued.addEventListener('inputChange', (event) => {
+              updateRow(index, 'show_accrued', readCheckboxValue(event));
+            });
+            accruedWrap.appendChild(accrued);
+            tdAccrued.appendChild(accruedWrap);
+
+            const tdOnCheck = document.createElement('td');
+            tdOnCheck.className = 'col-toggle';
+            const onCheckWrap = document.createElement('div');
+            onCheckWrap.className = 'toggle-cell';
+            const onCheck = createCheckbox({
+              ariaLabel: `Display on check row ${index + 1}`,
+              checked: row.show_on_check,
+            });
+            onCheck.addEventListener('inputChange', (event) => {
+              updateRow(index, 'show_on_check', readCheckboxValue(event));
+            });
+            onCheckWrap.appendChild(onCheck);
+            tdOnCheck.appendChild(onCheckWrap);
+
+            const tdActions = document.createElement('td');
+            tdActions.className = 'col-actions';
+            const actionsWrap = document.createElement('div');
+            actionsWrap.className = 'toggle-cell';
+            actionsWrap.appendChild(createRemoveButton(index));
+            tdActions.appendChild(actionsWrap);
+
+            tr.append(tdSpectrum, tdLabel, tdYtd, tdAccrued, tdOnCheck, tdActions);
             tbody.appendChild(tr);
           });
         }
 
         const atLimit = state.codes.length >= MAX_ROWS;
         btnAdd.disabled = atLimit;
-        limitNote.hidden = !atLimit;
+        limitNote.style.display = atLimit ? 'block' : 'none';
         renderPayload();
       }
 
-      function escapeAttr(str) {
-        return String(str)
-          .replace(/&/g, '&amp;')
-          .replace(/"/g, '&quot;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;');
+      function bindEvents() {
+        const sectionTitle = document.getElementById('section-title');
+        sectionTitle.addEventListener('inputChange', (event) => {
+          state.section_title = readInputValue(event).slice(0, 100);
+          sectionTitle.value = state.section_title;
+          renderPayload();
+        });
+
+        document.getElementById('btn-add').addEventListener('buttonClick', () => {
+          if (state.codes.length >= MAX_ROWS) return;
+          state.codes.push({
+            spectrum_code: '',
+            label: '',
+            show_ytd: false,
+            show_accrued: false,
+            show_on_check: false,
+          });
+          render();
+        });
       }
 
+      await defineCustomElements();
+      initShell();
+      bindEvents();
       render();
     </script>
   </body>
