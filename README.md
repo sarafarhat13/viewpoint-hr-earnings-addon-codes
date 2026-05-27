@@ -54,9 +54,7 @@ Or from terminal:
 open /Users/sfarhat/Documents/Projects/viewpoint-hr-earnings-addon-codes/preview/add-on-codes-preview.html
 ```
 
-The preview uses **Modus Web Components 1.5.0** (via CDN) and includes sample data, add/remove rows, and a live JSON payload panel.
-
-**Live demo:** https://sarafarhat13.github.io/viewpoint-hr-earnings-addon-codes/
+The preview includes sample data, add/remove rows, and a live JSON payload panel.
 
 ## Dependencies
 
