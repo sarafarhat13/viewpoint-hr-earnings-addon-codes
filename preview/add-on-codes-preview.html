@@ -299,10 +299,23 @@
         background: transparent;
         color: var(--primary-600);
         cursor: help;
-        font-size: var(--modus-wc-font-size-md, 0.875rem);
-        font-weight: var(--modus-wc-font-weight-bold, 700);
-        font-style: italic;
-        line-height: 1;
+        line-height: 0;
+      }
+
+      .info-btn:hover,
+      .info-btn:focus-visible {
+        color: var(--primary-700);
+      }
+
+      .info-btn:focus-visible {
+        outline: 2px solid var(--primary-600);
+        outline-offset: 2px;
+      }
+
+      .info-btn svg {
+        width: 1.125rem;
+        height: 1.125rem;
+        display: block;
       }
 
       .info-btn:hover + .tooltip,
@@ -584,7 +597,17 @@
                       aria-label="About Add-On codes"
                       aria-describedby="addon-tooltip"
                     >
-                      i
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 18 18"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path
+                          d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9C1.5 13.14 4.86 16.5 9 16.5C13.14 16.5 16.5 13.14 16.5 9C16.5 4.86 13.14 1.5 9 1.5ZM9.795 12.1125C9.795 12.525 9.4575 12.8625 9.045 12.8625C8.6325 12.8625 8.295 12.525 8.295 12.1125V9.0075C8.295 8.595 8.6325 8.2575 9.045 8.2575C9.4575 8.2575 9.795 8.595 9.795 9.0075V12.1125ZM9.045 6.78C8.6325 6.78 8.295 6.4425 8.295 6.03C8.295 5.6175 8.6325 5.28 9.045 5.28C9.4575 5.28 9.795 5.6175 9.795 6.03C9.795 6.4425 9.4575 6.78 9.045 6.78Z"
+                        />
+                      </svg>
                     </button>
                     <span id="addon-tooltip" class="tooltip" role="tooltip">
                       Configure specific Add-On codes from Spectrum to display as
