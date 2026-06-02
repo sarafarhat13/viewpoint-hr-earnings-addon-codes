@@ -273,7 +273,7 @@ export function AddOnCodesSection({
           onButtonClick={handleAddRow}
         >
           <ModusWcIcon decorative name="add" size="sm" />
-          + Add Add-On Code
+          + Add Code
         </ModusWcButton>
         {!canAddMore && (
           <p className="addon-codes-section__limit-note" role="status">

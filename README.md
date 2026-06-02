@@ -72,4 +72,4 @@ Import Modus styles once in your app entry (per your project’s Modus setup).
 - Spectrum code forced to ALL CAPS via `text-transform` and `toUpperCase()` on change
 - Label max 50 characters
 - Display YTD / Display Accrued / Display On Check checkboxes
-- Remove row (trash icon), add row (`+ Add Add-On Code`)
+- Remove row (trash icon), add row (`+ Add Code`)
