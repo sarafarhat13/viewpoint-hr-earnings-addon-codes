@@ -96,17 +96,17 @@ export function AddOnCodesSection({
       aria-labelledby={`${baseId}-legend`}
     >
       <h3 id={`${baseId}-legend`} className="visually-hidden">
-        Add-On Codes
+        Canadian Accrued Balance Information
       </h3>
 
       <div className="addon-codes-section__heading-row">
         <div className="addon-codes-section__section-label">
-          <span>Add-On Codes</span>
+          <span>Canadian Accrued Balance Information</span>
           <ModusWcTooltip content={TOOLTIP_TEXT} position="top">
             <button
               type="button"
               className="addon-codes-section__info-trigger"
-              aria-label="About Add-On codes"
+              aria-label="About Canadian Accrued Balance Information"
             >
               <ModusWcIcon decorative name="info" size="sm" />
             </button>
